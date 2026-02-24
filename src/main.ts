@@ -1,3 +1,4 @@
+import { registerSW } from 'virtual:pwa-register'
 import { createApp } from 'vue'
 
 import App from '@/App.vue'
@@ -15,3 +16,13 @@ registerPlugins(app)
 
 // Mount vue app
 app.mount('#app')
+
+// Register Service Worker
+registerSW({
+  onNeedRefresh() {
+    console.log('Nueva versión disponible. Recarga la página para actualizar.')
+  },
+  onOfflineReady() {
+    console.log('App lista para trabajar sin conexión.')
+  },
+})

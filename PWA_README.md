@@ -1,0 +1,163 @@
+# Configuración PWA - Materio Template
+
+## ✅ Configuración Completada
+
+Tu aplicación ya está configurada como PWA con las siguientes características:
+
+- ✅ `vite-plugin-pwa` instalado
+- ✅ Service Worker configurado con auto-actualización
+- ✅ Manifest.json generado automáticamente
+- ✅ Meta tags PWA agregados al HTML
+- ✅ Composable `usePwaUpdate` para manejar actualizaciones
+
+## 📋 Pasos Pendientes
+
+### 1. Generar Iconos PWA
+
+Actualmente faltan los siguientes iconos en `/public`:
+- `android-chrome-192x192.png` (192x192)
+- `android-chrome-512x512.png` (512x512)
+- `apple-touch-icon.png` (180x180)
+- `apple-touch-icon-180x180.png` (180x180)
+
+#### Opciones para generar los iconos:
+
+**Opción A - Herramientas Online:**
+1. [RealFaviconGenerator](https://realfavicongenerator.net/) - Sube tu logo y genera todos los iconos
+2. [PWA Asset Generator](https://www.pwabuilder.com/imageGenerator) - Generador de Microsoft
+
+**Opción B - CLI (Recomendado):**
+```bash
+# Instalar el generador
+npm install -g pwa-asset-generator
+
+# Generar iconos (reemplaza 'logo.png' con tu logo)
+pwa-asset-generator ./public/logo.png ./public --icon-only --splash-only false
+```
+
+**Opción C - Manual:**
+- Crea un icono de 512x512 px con tu logo
+- Redimensiónalo a los tamaños necesarios usando herramientas como Photoshop, GIMP, o convertidores online
+
+## 🚀 Verificar la Instalación
+
+### En Desarrollo:
+```bash
+pnpm dev
+```
+
+Luego abre Chrome DevTools:
+1. Ve a **Application** > **Manifest**
+2. Verifica que todos los campos estén correctos
+3. Ve a **Application** > **Service Workers**
+4. Verifica que el SW esté registrado
+
+### En Producción:
+```bash
+pnpm build
+pnpm preview
+```
+
+### ✅ Checklist de Verificación:
+
+- [ ] Manifest carga correctamente (DevTools > Application > Manifest)
+- [ ] Service Worker registrado (DevTools > Application > Service Workers)
+- [ ] Los iconos aparecen en el manifest
+- [ ] App es instalable (icono de instalación en la barra de direcciones)
+- [ ] Funciona offline (DevTools > Network > cambiar a "Offline")
+- [ ] Al actualizar el código, el usuario ve un mensaje de actualización
+
+## 🔧 Personalización
+
+### Cambiar Colores y Nombres
+
+Edita el archivo `vite.config.ts`:
+
+```typescript
+manifest: {
+  name: 'Tu App Nombre Completo',
+  short_name: 'TuApp',
+  description: 'Descripción de tu aplicación',
+  theme_color: '#TU_COLOR',
+  background_color: '#ffffff',
+  // ... resto de configuración
+}
+```
+
+### Usar el Composable de Actualización
+
+Si quieres mostrar un mensaje personalizado cuando hay una actualización disponible:
+
+```vue
+<script setup>
+import { usePwaUpdate } from '@/composables/usePwaUpdate'
+
+const { needRefresh, offlineReady, refresh, close } = usePwaUpdate()
+</script>
+
+<template>
+  <!-- Mensaje cuando hay una actualización -->
+  <VSnackbar
+    v-model="needRefresh"
+    :timeout="-1"
+  >
+    Nueva versión disponible
+    <template #actions>
+      <VBtn
+        color="primary"
+        @click="refresh"
+      >
+        Actualizar
+      </VBtn>
+      <VBtn @click="close">
+        Cerrar
+      </VBtn>
+    </template>
+  </VSnackbar>
+
+  <!-- Mensaje cuando está lista para offline -->
+  <VSnackbar
+    v-model="offlineReady"
+    timeout="3000"
+  >
+    App lista para trabajar sin conexión
+  </VSnackbar>
+</template>
+```
+
+## 📱 Probar la Instalación
+
+### En Chrome/Edge:
+1. Abre la app en el navegador
+2. Busca el icono de instalación en la barra de direcciones (⊕)
+3. Click en "Instalar"
+
+### En Android:
+1. Abre la app en Chrome
+2. Menú > "Añadir a la pantalla de inicio"
+
+### En iOS:
+1. Abre la app en Safari
+2. Click en el botón "Compartir"
+3. "Añadir a la pantalla de inicio"
+
+## 🔍 Recursos Adicionales
+
+- [vite-plugin-pwa Docs](https://vite-pwa-org.netlify.app/)
+- [Workbox](https://developer.chrome.com/docs/workbox/)
+- [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+- [PWA Checklist](https://web.dev/pwa-checklist/)
+
+## 🐛 Troubleshooting
+
+### El Service Worker no se actualiza:
+- Limpia la caché del navegador
+- En DevTools > Application > Service Workers, click "Unregister" y recarga
+
+### La app no es instalable:
+- Verifica que los iconos existan en `/public`
+- Asegúrate de servir la app sobre HTTPS (o localhost)
+- Verifica el manifest en DevTools
+
+### Archivos grandes no se cachean:
+- Aumenta `maximumFileSizeToCacheInBytes` en `vite.config.ts`
