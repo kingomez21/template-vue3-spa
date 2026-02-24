@@ -9,35 +9,26 @@ Tu aplicación ya está configurada como PWA con las siguientes características
 - ✅ Manifest.json generado automáticamente
 - ✅ Meta tags PWA agregados al HTML
 - ✅ Composable `usePwaUpdate` para manejar actualizaciones
+- ✅ **Iconos PWA generados y configurados**
 
-## 📋 Pasos Pendientes
+## 🎨 Iconos PWA Generados
 
-### 1. Generar Iconos PWA
+Los siguientes iconos ya están disponibles en `/public`:
+- ✅ `manifest-icon-192.maskable.png` (192x192) - Android
+- ✅ `manifest-icon-512.maskable.png` (512x512) - Android
+- ✅ `apple-icon-180.png` (180x180) - iOS
+- ✅ `favicon-196.png` (196x196) - Favicon HD
+- ✅ `favicon.ico` - Favicon estándar
 
-Actualmente faltan los siguientes iconos en `/public`:
-- `android-chrome-192x192.png` (192x192)
-- `android-chrome-512x512.png` (512x512)
-- `apple-touch-icon.png` (180x180)
-- `apple-touch-icon-180x180.png` (180x180)
+### Regenerar Iconos
 
-#### Opciones para generar los iconos:
+Si necesitas regenerar los iconos con un nuevo logo, coloca tu `logo.png` en la raíz del proyecto y ejecuta:
 
-**Opción A - Herramientas Online:**
-1. [RealFaviconGenerator](https://realfavicongenerator.net/) - Sube tu logo y genera todos los iconos
-2. [PWA Asset Generator](https://www.pwabuilder.com/imageGenerator) - Generador de Microsoft
-
-**Opción B - CLI (Recomendado):**
 ```bash
-# Instalar el generador
-npm install -g pwa-asset-generator
-
-# Generar iconos (reemplaza 'logo.png' con tu logo)
-pwa-asset-generator ./public/logo.png ./public --icon-only --splash-only false
+pnpm generate:pwa-icons
 ```
 
-**Opción C - Manual:**
-- Crea un icono de 512x512 px con tu logo
-- Redimensiónalo a los tamaños necesarios usando herramientas como Photoshop, GIMP, o convertidores online
+Ver más detalles en [PWA_ICONS_README.md](PWA_ICONS_README.md)
 
 ## 🚀 Verificar la Instalación
 

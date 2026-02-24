@@ -52,7 +52,7 @@ export default defineConfig({
     svgLoader(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'logo.png'],
+      includeAssets: ['favicon.ico', 'logo.png', 'favicon-196.png', 'apple-icon-180.png'],
       devOptions: {
         enabled: true, // Habilitar PWA en desarrollo para pruebas
       },
@@ -67,17 +67,25 @@ export default defineConfig({
         lang: 'es',
         icons: [
           {
-            src: '/android-chrome-192x192.png',
+            src: '/manifest-icon-192.maskable.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any',
           },
           {
-            src: '/android-chrome-512x512.png',
+            src: '/manifest-icon-192.maskable.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: '/manifest-icon-512.maskable.png',
             sizes: '512x512',
             type: 'image/png',
+            purpose: 'any',
           },
           {
-            src: '/android-chrome-512x512.png',
+            src: '/manifest-icon-512.maskable.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',
