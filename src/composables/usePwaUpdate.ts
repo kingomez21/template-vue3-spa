@@ -1,3 +1,4 @@
+/* eslint import/no-unresolved: "off" */
 import { registerSW } from 'virtual:pwa-register'
 import { ref } from 'vue'
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useLocale } from '@/composables/useLocale'
 
-const { locale, setLocale, availableLocales } = useLocale()
+const { locale, setLocale } = useLocale()
 
 const languageOptions = [
   { title: 'Español', value: 'es', flag: '🇪🇸' },
@@ -12,13 +12,9 @@ const languageOptions = [
 <template>
   <VMenu>
     <template #activator="{ props }">
-      <VBtn
-        v-bind="props"
-        variant="text"
-        icon
-      >
-        <VIcon>mdi-translate</VIcon>
-      </VBtn>
+      <IconBtn v-bind="props">
+        <VIcon icon="ri-global-line" />
+      </IconBtn>
     </template>
 
     <VList>

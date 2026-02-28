@@ -4,62 +4,30 @@ import { defineStore } from 'pinia'
  * Store de ejemplo con persistencia activada
  * El estado se guardará automáticamente en localStorage
  */
-export const useAppStore = defineStore('app', {
-  state: () => ({
-    // Configuración de la aplicación
-    theme: 'light' as 'light' | 'dark',
-    sidebarCollapsed: false,
-    language: 'es',
+export const useAppStore = defineStore('app', () => {
+  const app = reactive<any>({
+    appName: 'Process Management System',
+    version: '1.0.0',
+    progress: false,
+    messageProgress: '',
+    menu: [] as any[],
+  })
 
-    // Datos temporales (no se persisten)
-    loading: false,
-    notifications: [] as Array<{ id: string; message: string }>,
-  }),
+  function updateAppName(newName: string) {
+    app.appName = newName
+  }
 
-  getters: {
-    isDarkTheme: state => state.theme === 'dark',
-    notificationCount: state => state.notifications.length,
-  },
+  function setProgress(isInProgress: boolean) {
+    app.progress = isInProgress
+  }
 
-  actions: {
-    toggleTheme() {
-      this.theme = this.theme === 'light' ? 'dark' : 'light'
-    },
+  function setMessageProgress(message: string) {
+    app.messageProgress = message
+  }
 
-    toggleSidebar() {
-      this.sidebarCollapsed = !this.sidebarCollapsed
-    },
+  function setMenu(menuItems: any[]) {
+    app.menu = menuItems
+  }
 
-    setLanguage(lang: string) {
-      this.language = lang
-    },
-
-    setLoading(value: boolean) {
-      this.loading = value
-    },
-
-    addNotification(message: string) {
-      this.notifications.push({
-        id: Date.now().toString(),
-        message,
-      })
-    },
-
-    removeNotification(id: string) {
-      const index = this.notifications.findIndex(n => n.id === id)
-      if (index !== -1)
-        this.notifications.splice(index, 1)
-    },
-  },
-
-  // ✅ Configuración de persistencia
-  persist: {
-    key: 'app-settings',
-    storage: localStorage,
-
-    // Solo persistir estas propiedades
-    paths: ['theme', 'sidebarCollapsed', 'language'],
-
-    // loading y notifications NO se persisten
-  },
+  return { app, updateAppName, setProgress, setMessageProgress, setMenu }
 })

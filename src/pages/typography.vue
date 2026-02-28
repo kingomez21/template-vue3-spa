@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import SweetAlertExamples from '@/views/examples/SweetAlertExamples.vue'
 import TypographyHeadlines from '@/views/user-interface/typography/TypographyHeadlines.vue'
 import TypographyTexts from '@/views/user-interface/typography/TypographyTexts.vue'
 </script>
@@ -10,12 +9,10 @@ import TypographyTexts from '@/views/user-interface/typography/TypographyTexts.v
       <TypographyHeadlines />
     </VCol>
 
-    <VCol cols="12">
-      <TypographyTexts />
-    </VCol>
+    {{ $t('common.welcome') }}
 
     <VCol cols="12">
-      <SweetAlertExamples />
+      <TypographyTexts />
     </VCol>
   </VRow>
 </template>
