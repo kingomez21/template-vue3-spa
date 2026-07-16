@@ -54,7 +54,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'logo.png', 'favicon-196.png', 'apple-icon-180.png'],
       devOptions: {
-        enabled: true, // Habilitar PWA en desarrollo para pruebas
+        enabled: false, // Habilitar PWA en desarrollo para pruebas
       },
       manifest: {
         name: 'Materio - Vuetify Admin Template',
