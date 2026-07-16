@@ -13,14 +13,22 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
 <template>
   <VerticalNavLayout>
     <!-- 👉 navbar -->
-    <template #navbar="{ toggleVerticalOverlayNavActive }">
+    <template #navbar="{ toggleVerticalOverlayNavActive, toggleIsVerticalNavCollapsed, isVerticalNavCollapsed }">
       <div class="d-flex h-100 align-center">
-        <!-- 👉 Vertical nav toggle in overlay mode -->
+        <!-- 👉 Vertical nav toggle in overlay mode (mobile/tablet) -->
         <IconBtn
           class="ms-n3 d-lg-none"
           @click="toggleVerticalOverlayNavActive(true)"
         >
           <VIcon icon="ri-menu-line" />
+        </IconBtn>
+
+        <!-- 👉 Vertical nav collapse/expand toggle (desktop) -->
+        <IconBtn
+          class="ms-n3 d-none d-lg-flex"
+          @click="toggleIsVerticalNavCollapsed(!isVerticalNavCollapsed)"
+        >
+          <VIcon :icon="isVerticalNavCollapsed ? 'ri-menu-unfold-line' : 'ri-menu-fold-line'" />
         </IconBtn>
 
         <!-- 👉 Search -->

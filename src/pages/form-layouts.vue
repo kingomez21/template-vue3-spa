@@ -64,3 +64,8 @@ import DemoFormLayoutVerticalFormWithIcons from '@/views/pages/form-layouts/Demo
     </VRow>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

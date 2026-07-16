@@ -95,3 +95,8 @@ const iconsList = [
     </div>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

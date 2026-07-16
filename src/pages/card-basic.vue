@@ -25,3 +25,8 @@ import CardSolid from '@/views/pages/cards/card-basic/CardSolid.vue'
     <CardSolid />
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

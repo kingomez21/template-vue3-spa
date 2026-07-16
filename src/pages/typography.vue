@@ -16,3 +16,8 @@ import TypographyTexts from '@/views/user-interface/typography/TypographyTexts.v
     </VCol>
   </VRow>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

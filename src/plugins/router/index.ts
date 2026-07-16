@@ -1,10 +1,14 @@
 import type { App } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from './routes'
+import { routes } from 'vue-router/auto-routes'
+import { setupLayouts } from 'virtual:generated-layouts'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
+  routes: [
+    { path: '/', redirect: '/dashboard' },
+    ...setupLayouts(routes),
+  ],
 })
 
 router.beforeEach((to, from, next) => {

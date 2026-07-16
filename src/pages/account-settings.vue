@@ -59,3 +59,8 @@ const tabs = [
     </VWindow>
   </div>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

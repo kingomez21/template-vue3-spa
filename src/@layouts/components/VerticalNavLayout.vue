@@ -15,6 +15,14 @@ export default defineComponent({
     // We want to show overlay if overlay nav is visible and want to hide overlay if overlay is hidden and vice versa.
     syncRef(isOverlayNavActive, isLayoutOverlayVisible)
 
+    // 👉 Elevate sticky navbar once the page content has scrolled
+    const { y: windowScrollY } = useWindowScroll()
+    const isWindowScrolled = computed(() => windowScrollY.value > 0)
+
+    // 👉 Collapse/expand vertical nav (desktop only — mobile uses the overlay nav instead)
+    const isVerticalNavCollapsed = ref(false)
+    const toggleIsVerticalNavCollapsed = useToggle(isVerticalNavCollapsed)
+
     return () => {
       // 👉 Vertical nav
       const verticalNav = h(
@@ -38,6 +46,8 @@ export default defineComponent({
             { class: 'navbar-content-container' },
             slots.navbar?.({
               toggleVerticalOverlayNavActive: toggleIsOverlayNavActive,
+              toggleIsVerticalNavCollapsed,
+              isVerticalNavCollapsed: isVerticalNavCollapsed.value,
             }),
           ),
         ],
@@ -75,8 +85,10 @@ export default defineComponent({
         'div',
         {
           class: [
-            'layout-wrapper layout-nav-type-vertical layout-navbar-static layout-footer-static layout-content-width-fluid',
+            'layout-wrapper layout-nav-type-vertical layout-navbar-sticky layout-footer-static layout-content-width-fluid',
             mdAndDown.value && 'layout-overlay-nav',
+            !mdAndDown.value && isVerticalNavCollapsed.value && 'layout-vertical-nav-collapsed',
+            isWindowScrolled.value && 'window-scrolled',
             route.meta.layoutWrapperClasses,
           ],
         },

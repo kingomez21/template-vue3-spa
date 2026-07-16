@@ -51,3 +51,8 @@ import DemoSimpleTableTheme from '@/views/pages/tables/DemoSimpleTableTheme.vue'
     </VCol>
   </VRow>
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

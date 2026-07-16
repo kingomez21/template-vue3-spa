@@ -176,3 +176,10 @@ const isPasswordVisible = ref(false)
 <style lang="scss">
 @use "@core/scss/template/pages/page-auth";
 </style>
+
+<route lang="yaml">
+meta:
+  layout: blank
+  requiresAuth: false
+  unauthenticatedOnly: true
+</route>

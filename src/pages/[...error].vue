@@ -60,3 +60,9 @@ const authThemeMask = computed(() => {
   inset-inline-start: 0.375rem;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  layout: blank
+  requiresAuth: false
+</route>

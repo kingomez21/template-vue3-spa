@@ -1,3 +1,5 @@
+/// <reference types="unplugin-vue-router/client" />
+
 import 'vue-router'
 
 declare module 'vue-router' {
